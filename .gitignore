@@ -1,3 +1,5 @@
 main
 .cache
 compile_commands.json
+exe
+test.png

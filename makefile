@@ -5,14 +5,14 @@ skia-raster: ./src/skia-raster-backend-example.cpp
 		-I/home/printfdebugging/downloads/skia/skia \
 		-L/home/printfdebugging/downloads/skia/skia/out/Shared \
 		-lskia \
-		-lglfw \
+		-lglfw
 
-skia-raster: ./src/skia-opengl-backend-example.cpp
+skia-opengl: ./src/skia-opengl-backend-example.cpp
 	g++ $^ -o exe \
 		-I/home/printfdebugging/downloads/skia/skia \
 		-L/home/printfdebugging/downloads/skia/skia/out/Shared \
 		-lskia \
-		-lglfw \
+		-lglfw
 
 run: skia-raster
 	./exe
