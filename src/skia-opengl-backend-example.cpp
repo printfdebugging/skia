@@ -1,24 +1,21 @@
 #include <stdlib.h>
-#include <stdio.h>
-
+#include "common.h"
 #include "GLFW/glfw3.h"
 
 #define SK_GANESH
 #define SK_GL
 #include "include/gpu/ganesh/GrBackendSurface.h"
 #include "include/gpu/ganesh/GrDirectContext.h"
+#include "include/gpu/ganesh/SkSurfaceGanesh.h"
+
 #include "include/gpu/ganesh/gl/GrGLInterface.h"
 #include "include/gpu/ganesh/gl/GrGLAssembleInterface.h"
-#include "include/gpu/ganesh/SkSurfaceGanesh.h"
 #include "include/gpu/ganesh/gl/GrGLBackendSurface.h"
 #include "include/gpu/ganesh/gl/GrGLDirectContext.h"
+
 #include "include/core/SkColorSpace.h"
 #include "include/core/SkCanvas.h"
 #include "include/core/SkSurface.h"
-
-#define ERROR(message, ...)                                \
-    fprintf(stderr, "%s:%i: error: ", __FILE__, __LINE__); \
-    fprintf(stderr, message, ##__VA_ARGS__)
 
 GrDirectContext* context = nullptr;
 SkSurface* surface = nullptr;

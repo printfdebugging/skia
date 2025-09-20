@@ -1,14 +1,21 @@
 export LD_LIBRARY_PATH=/home/printfdebugging/downloads/skia/skia/out/Shared
 
-main: main.cpp
-	g++ main.cpp -o main \
+skia-raster: ./src/skia-raster-backend-example.cpp
+	g++ $^ -o exe \
 		-I/home/printfdebugging/downloads/skia/skia \
 		-L/home/printfdebugging/downloads/skia/skia/out/Shared \
 		-lskia \
 		-lglfw \
 
-run: main
-	./main
+skia-raster: ./src/skia-opengl-backend-example.cpp
+	g++ $^ -o exe \
+		-I/home/printfdebugging/downloads/skia/skia \
+		-L/home/printfdebugging/downloads/skia/skia/out/Shared \
+		-lskia \
+		-lglfw \
+
+run: skia-raster
+	./exe
 
 clean:
-	rm -rf ./main
+	rm -rf ./exe
