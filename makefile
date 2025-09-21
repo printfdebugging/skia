@@ -1,20 +1,25 @@
-export LD_LIBRARY_PATH=/home/printfdebugging/downloads/skia/skia/out/Shared
+export LD_LIBRARY_PATH=./libs/skia/out/Shared
+SKIA_SHARED=./libs/skia/out/Shared/libskia.so
 
-skia-raster: ./src/skia-raster-backend-example.cpp
-	g++ $^ -o exe \
+$(SKIA_SHARED):
+	echo $(SKIA_SHARED)
+	[ ! -f "$@" ] && bash ./scripts/build-skia.sh
+
+skia-raster: ./src/skia-raster-backend-example.cpp $(SKIA_SHARED)
+	g++ $< -o exe \
 		-I/home/printfdebugging/downloads/skia/skia \
 		-L/home/printfdebugging/downloads/skia/skia/out/Shared \
 		-lskia \
 		-lglfw
 
-skia-opengl: ./src/skia-opengl-backend-example.cpp
-	g++ $^ -o exe \
+skia-opengl: ./src/skia-opengl-backend-example.cpp $(SKIA_SHARED)
+	g++ $< -o exe \
 		-I/home/printfdebugging/downloads/skia/skia \
 		-L/home/printfdebugging/downloads/skia/skia/out/Shared \
 		-lskia \
 		-lglfw
 
-run: skia-raster
+run: skia-opengl
 	./exe
 
 clean:
