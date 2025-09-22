@@ -48,6 +48,15 @@ static void process_input(GLFWwindow* window) {
     }
 }
 
+static void draw(SkCanvas* canvas) {
+    SkPaint paint;
+    paint.setColor(SK_ColorBLACK);
+    canvas->drawPaint(paint);
+    paint.setColor(SK_ColorBLUE);
+    canvas->drawRect({100, 200, 300, 500}, paint);
+    context->flush();
+}
+
 int main() {
     if (!glfwInit()) {
         ERROR("failed to initialize glfw\n");
@@ -80,13 +89,7 @@ int main() {
         glfwPollEvents();
         process_input(window);
 
-        SkPaint paint;
-        paint.setColor(SK_ColorBLACK);
-        canvas->drawPaint(paint);
-        paint.setColor(SK_ColorBLUE);
-        canvas->drawRect({100, 200, 300, 500}, paint);
-        context->flush();
-
+        draw(canvas);
         glfwSwapBuffers(window);
     }
 
