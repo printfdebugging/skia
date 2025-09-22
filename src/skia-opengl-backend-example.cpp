@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include "common.h"
 #include "GLFW/glfw3.h"
+#include "include/core/SkScalar.h"
+#include "include/core/SkTextBlob.h"
+#include "include/effects/SkGradientShader.h"
+#include "include/effects/SkPerlinNoiseShader.h"
 
 #define SK_GANESH
 #define SK_GL
@@ -49,12 +53,10 @@ static void process_input(GLFWwindow* window) {
 }
 
 static void draw(SkCanvas* canvas) {
+    canvas->clear(SK_ColorWHITE);
     SkPaint paint;
-    paint.setColor(SK_ColorBLACK);
+    paint.setShader(SkShaders::MakeTurbulence(0.05f, 0.05f, 4, 0.0f, nullptr));
     canvas->drawPaint(paint);
-    paint.setColor(SK_ColorBLUE);
-    canvas->drawRect({100, 200, 300, 500}, paint);
-    context->flush();
 }
 
 int main() {
@@ -90,6 +92,8 @@ int main() {
         process_input(window);
 
         draw(canvas);
+
+        context->flush();
         glfwSwapBuffers(window);
     }
 
